@@ -26,4 +26,47 @@ export class EmployeeService {
             throw error;
         }
     }
+    async findNames(id:number): Promise<Pick<Employee, "fname" | "lname">[]>{
+        try {
+            const data: Pick<Employee, "fname" | "lname">[]=await this.employeeDao.findNames(id);
+            return data;
+        } catch (error) {
+           throw error; 
+        }
+    }
+    async findById(id:number): Promise<Employee|undefined>{
+        try {
+          const data:Employee|undefined = await this.employeeDao.findById(id); 
+          return data; 
+        } catch (error) {
+            throw error;
+        }
+    }
+    async findByNameStartsWith(name:string): Promise<Employee[]>{
+        try {
+           const employees:Employee[] = await this.employeeDao.findByNameStartsWith(name);
+           return employees;
+        } catch (error) {
+             throw error;
+        }
+    }
+    async save(employee:Employee): Promise<any>{
+       try {
+           const currentDateTime:Date=new Date();
+           employee.createdAt=currentDateTime;
+           employee.updatedAt=currentDateTime;
+           const id:number = await this.employeeDao.save(employee);
+           return id;
+       } catch (error) {
+           throw error;
+       }
+    }
+    async deleteById(id:number): Promise<any>{
+        try {
+           return await this.employeeDao.deleteById(id);
+        } catch (error) {
+            throw error;
+        }
+    }
+
 }
