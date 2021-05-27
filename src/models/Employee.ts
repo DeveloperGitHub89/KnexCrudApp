@@ -5,7 +5,7 @@ export interface Employee {
     phone: string;
     dob: Date;
     salary: number;
-    createdAt?: Date;
-    updatedAt?: Date;
+    created_at?: Date;
+    updated_at?: Date;
 }
 
